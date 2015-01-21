@@ -1,0 +1,89 @@
+footer {
+  text-align: center;
+}
+#title-bar,
+#footer {
+  padding: 0 10px;
+}
+/********************************************************************
+ *   UNimportant convenience CSS
+ */
+.mapwrapper {
+  background: #ccf;
+}
+.content {
+  background: #ddd;
+}
+/********************************************************************
+ *   IMPORTANT layout CSS
+ */
+header.jumbotron {
+  margin-bottom: 0;
+  padding-bottom: 10px;
+}
+.contentwrapper {
+  position: relative;
+  margin: 0 auto;
+  transition: all 1s;
+  /* height is set in js to fill the browser window */
+
+}
+.contentwrapper.map-inactive {
+  width: 800px;
+}
+.contentwrapper.map-active {
+  width: 100%;
+}
+.content {
+  float: right;
+  width: 700px;
+}
+.mapwrapper {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 700px;
+  overflow: hidden;
+}
+.map {
+  height: 100%;
+}
+.content {
+  background-color: #ffffff;
+  padding-right: 33.333333333333336px;
+}
+/********************************************************************
+ *   IMPORTANT map prettiness CSS
+ */
+.mapnotch {
+  position: absolute;
+  height: 0;
+  width: 0;
+  border-left: 33.333333333333336px solid transparent;
+  border-top: 33.333333333333336px solid #ffffff;
+  border-bottom: 33.333333333333336px solid #ffffff;
+  bottom: 50%;
+  right: 0;
+}
+.mapnotch:before,
+.mapnotch:after {
+  background-color: #ffffff;
+  position: absolute;
+  right: 0;
+  content: '';
+  width: 33.333333333333336px;
+  height: 100vh;
+}
+.mapnotch:before {
+  bottom: 32.333333333333336px;
+}
+.mapnotch:after {
+  top: 32.333333333333336px;
+}
+.leaflet-right {
+  right: 33.333333333333336px;
+}
+.map-inactive .leaflet-control-container {
+  display: none;
+}
