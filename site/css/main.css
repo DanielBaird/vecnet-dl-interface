@@ -1,8 +1,7 @@
 footer {
   text-align: center;
 }
-#title-bar,
-#footer {
+#title-bar {
   padding: 0 10px;
 }
 /********************************************************************
@@ -58,28 +57,29 @@ header.jumbotron {
  */
 .mapnotch {
   position: absolute;
-  height: 0;
-  width: 0;
-  border-left: 33.333333333333336px solid transparent;
-  border-top: 33.333333333333336px solid #ffffff;
-  border-bottom: 33.333333333333336px solid #ffffff;
+  box-sizing: content-box;
+  height: 66.66666666666667px;
+  width: 33.333333333333336px;
   bottom: 50%;
-  right: 0;
+  right: -33.333333333333336px;
+  border: 33.333333333333336px solid #ffffff;
+  border-left-width: 0;
+  border-radius: 0 66.66666666666667px 66.66666666666667px 0;
 }
 .mapnotch:before,
 .mapnotch:after {
-  background-color: #ffffff;
   position: absolute;
-  right: 0;
+  left: 0;
   content: '';
   width: 33.333333333333336px;
   height: 100vh;
+  background-color: #ffffff;
 }
 .mapnotch:before {
-  bottom: 32.333333333333336px;
+  bottom: 67px;
 }
 .mapnotch:after {
-  top: 32.333333333333336px;
+  top: 67px;
 }
 .leaflet-right {
   right: 33.333333333333336px;
