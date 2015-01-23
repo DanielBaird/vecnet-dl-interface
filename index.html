@@ -1,19 +1,65 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>VecNet DL sketch</title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>VecNet DL sketch</title>
 
-  <style>
-    body{
-      font:500 14px/21px 'Helvetica Neue', sans-serif;
-      padding:40px;
-    }
-  </style>
+	<style>
+		body {
+			font: 500 14px/21px 'Helvetica Neue', sans-serif;
+			padding: 40px;
+		}
+		h1 { padding: 1em 3em 3em; }
+		p  { padding: 0 0 1em; }
+		.testwrapper {
+			display: inline-block;
+			width: 300px;
+			padding: 40px 50px 50px;
+			margin: 10px;
+			background: #bbe8ff;
+		}
+		.testwrapper .demo {
+			margin: 1em 0;
+			padding: 1em 2em 2em;
+			border-radius: 1em;
+			background-color: #adf;
+		}
+		#bugdemo1 {
+			height: 100px;
+			width: 50px;
+
+			border-top: 50px solid red;
+			border-right: 50px solid yellow;
+			border-bottom: 50px solid yellow;
+			border-left: none;
+
+			border-top-right-radius: 100px;
+			border-bottom-right-radius: 100px;
+
+			transition: 2s;
+		}
+		#bugdemo1:hover {
+			width: 75px;
+		}
+	</style>
 
 </head>
 <body>
-  <h1><a href="./site/">site</a></h1>
+	<h1><a href="./site/index.html">go to demo site</a></h1>
+	<hr>
+	<h2>(testing stuff below, plz ignore)</h2>
+	<div class="testwrapper">
+		<p>Safari bug: in 7.1.2, adjoining rounded borders that are the same colour don't paint the inside curve correctly.</p>
+		<p>Changing the width changes the error (hover over the example below).</p>
+		<div class="demo">
+			<p>live example</p>
+			<div id="bugdemo1"></div>
+		</div>
+		<div class="demo">
+			<p>Screencap: Safari 7.1.2 / OSX 10.9.5</p>
+			<img src="assets/safari-border-bug.gif" />
+		</div>
+	</div>
 </body>
 </html>

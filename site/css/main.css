@@ -66,6 +66,7 @@ header.jumbotron {
   border-left-width: 0;
   border-top-right-radius: 66.66666666666667px;
   border-bottom-right-radius: 66.66666666666667px;
+  border-right-color: #feffff;
 }
 .mapnotch:before,
 .mapnotch:after {
