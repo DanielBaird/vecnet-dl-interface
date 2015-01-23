@@ -22,4 +22,4 @@ cat parts/results1.html > site/results1.html
 
 popd > /dev/null
 
-echo 'done.'
+date "+finished %S seconds after %I:%M%p."

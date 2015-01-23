@@ -1,5 +1,5 @@
 
-
+////////////////////////////////////////////// some unimportant stuff
 footer {
     text-align: center;
 }
@@ -8,32 +8,21 @@ footer {
     padding: 0 10px;
 }
 
-/********************************************************************
- *   UNimportant convenience CSS
- */
-.mapwrapper {
-    background: #ccf;
-}
-
-.content {
-    background: #ddd;
-}
-
-/********************************************************************
- *   IMPORTANT layout CSS
- */
-
+/////////////////////////////////////////////////// all the LESS vars
 @result-column-width: 700px;
-@inactive-map-width: 100px;
-@map-pointer-width: (@inactive-map-width / 3);
+@inactive-map-width: 75px;
+@map-notch-width: ceil(@inactive-map-width / 3);
 @content-bg: #fff;
 
-
+/////////////////////////////////////////////// various page elements
+/* adjust header to be a bit slimmer */
 header.jumbotron {
     margin-bottom: 0;
     padding-bottom: 10px;
 }
 
+/////////////////////////////////////////////// map-and-column layout
+/* contentwrapper surrounds the map and the content */
 .contentwrapper {
     position: relative;
     margin: 0 auto;
@@ -41,19 +30,24 @@ header.jumbotron {
     /* height is set in js to fill the browser window */
 }
 
+/* the contentwrapper has an additional class that determines
+   whether the map is showing or not */
 .contentwrapper.map-inactive {
     width: (@result-column-width + @inactive-map-width);
 }
-
 .contentwrapper.map-active {
     width: 100%;
 }
 
+/* the content has a fixed width */
 .content {
     float: right;
+    /* TODO: this bit should be responsive */
     width: @result-column-width;
 }
 
+/* the map lives inside this wrapper which stays in a
+   fixed position relative to the contentwrapper */
 .mapwrapper {
     position: absolute;
     top: 0;
@@ -61,50 +55,131 @@ header.jumbotron {
     left: 0;
     right: @result-column-width;
     overflow: hidden;
+    transition: opacity 0.66s;
 }
 
 .map { height: 100%; }
 
 .map-inactive .mapwrapper {
-    // ...
+    opacity: 0.33;
 }
 
 .map-active .mapwrapper {
-    // ...
+    opacity: 1;
 }
 
+/* the content is the search form and results */
 .content {
     background-color: @content-bg;
-    padding-right: @map-pointer-width;
+    padding-right: @map-notch-width;
     // ...
 }
 
-/********************************************************************
- *   IMPORTANT map prettiness CSS
- */
+/////////////////////////////////////////////////////// the map notch
+//
+// The notch is an element with a transparent background and a
+// fat, rounded white border.  This means it's basically the right
+// half of a white donut.
+//
+// Above and below the donut I've added additional white rectangles
+// using :before and :after pseudoelements.
+// The donut and the rectangles cover up a strip on the right edge
+// of the map, from top to bottom.  The only bit of the map that
+// shows through is the hole in middle of the donut.
+//
+//           width is set by the LESS
+//            variable @map-notch-width
+//                   \----\
+//
+//                     .----.
+//                      \    \  top rectangle covering up
+// .---------------------\--. \  covers the upper part of the
+//  \                     \  \ \  map's right edge
+//   \                     \  \ \
+//    \    the              '----'
+//     \      map              #\###   donut reveals a semicircle
+//      \                        \ ###  of the map's right edge
+//       \                       #\###
+//        \                     .----.
+//         \                     \  \ \
+//          \                     \  \ \ bottom rectangle covering
+//           \                     \  \ \ the lower part of the
+//            \                     \  \ \ map's right edge
+//             \                     '----'
+//              \                        \
+//               '------------------------'
+//
+// The Donut looks like this. Note that a lot of the donut doesn't
+// show up on screen; the donut is just there so its inner ring
+// can give the map "notch" its concave shape.
+// The visible bits are rendered below using #; the bits drawn using
+// % are not visible.
+//
+//                  width = w
+//             .---------------.
+//             :               :
+//         .-  %%%%%%%%%%%%%%% :
+//  border |   %%%%%%%%%%%%%%%%%%%%%
+//   width |   %%%%%%%%%%%%%%%%:%%%%%%%%
+//     = w |   %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+//         |   %%%%%%%%%%%%%%%%:%%%%%%%%%%%%%
+//         |   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+//         '-  #################%%-%%-%%-%%-%%-  -  -.
+//                     #########%%%%%%%%%%%%%%%%     |
+//                         #####%%%%%%%%%%%%%%%%     |
+//                           ###%%%%%%%%%%%%%%%%%    |
+//                            ##%%%%%%%%%%%%%%%%%    | height = 2w
+//                             #%%%%%%%%%%%%%%%%%    |
+//             \  border       #%%%%%%%%%%%%%%%%%    |
+//              \ radius      ##%%%%%%%%%%%%%%%%%    |
+//               \  = 2w     ###%%%%%%%%%%%%%%%%%    |
+//                \        #####%%%%%%%%%%%%%%%%     |
+//                 \   #########%%%%%%%%%%%%%%%%     |
+//             #####\###########%%-%%-%%-%%-%%-  -  -'
+//             .-----\---------.%%%%%%%%%%%%%%
+//             |%%%%%%\%%%%%%%%|%%%%%%%%%%%%
+//             |%%%%%%%\%%%%%%%|%%%%%%%%%%%
+//             |%%%%%%%%\%%%%%%|%%%%%%%%
+//             |%%%%%%%%%\%%%%%|%%%%
+//             |%%%%%%%%%%\%%% |
+//             |               |
+//             | this is where |
+//             |  the bottom   |
+//             | rectangle is  |
+//             :  positioned.  :
+//             .(top rectangle .
+//              is similar but
+//               not drawn in
+//               this diagram)
+//
 .mapnotch {
     position: absolute;
     box-sizing: content-box;
-    height: (2 * @map-pointer-width);
-    width: @map-pointer-width;
+    height: (2 * @map-notch-width);
+    width: @map-notch-width;
     bottom: 50%;
-    right: (-1 * @map-pointer-width);
-    border: @map-pointer-width solid @content-bg;
+    right: (-1 * @map-notch-width);
+    border: @map-notch-width solid @content-bg;
     border-left-width: 0;
-    border-top-right-radius: (2 * @map-pointer-width);
-    border-bottom-right-radius: (2 * @map-pointer-width);
+    border-top-right-radius: (2 * @map-notch-width);
+    border-bottom-right-radius: (2 * @map-notch-width);
     border-right-color: #feffff; // fixes a weird safari bug
 }
+// the upper and lower rectangles
 .mapnotch:before, .mapnotch:after {
     position: absolute;
     left: 0;
     content: '';
-    width: @map-pointer-width;
+    width: (@map-notch-width + 1px);
     height: 100vh;
     background-color: @content-bg;
 }
-.mapnotch:before { bottom: ceil(2 * @map-pointer-width); }
-.mapnotch:after  { top:    ceil(2 * @map-pointer-width); }
+.mapnotch:before { bottom: (2 * @map-notch-width); }
+.mapnotch:after  { top:    (2 * @map-notch-width); }
 
-.leaflet-right { right: @map-pointer-width; }
+/* adjust leaflet's components to avoid drawing stuff like the
+   attribution text under the covered-up right edge strip */
+.leaflet-right { right: @map-notch-width; }
 .map-inactive .leaflet-control-container { display: none; }
+
+///////////////////////////////////////////////////////// search form

@@ -4,22 +4,12 @@ footer {
 #title-bar {
   padding: 0 10px;
 }
-/********************************************************************
- *   UNimportant convenience CSS
- */
-.mapwrapper {
-  background: #ccf;
-}
-.content {
-  background: #ddd;
-}
-/********************************************************************
- *   IMPORTANT layout CSS
- */
+/* adjust header to be a bit slimmer */
 header.jumbotron {
   margin-bottom: 0;
   padding-bottom: 10px;
 }
+/* contentwrapper surrounds the map and the content */
 .contentwrapper {
   position: relative;
   margin: 0 auto;
@@ -27,16 +17,23 @@ header.jumbotron {
   /* height is set in js to fill the browser window */
 
 }
+/* the contentwrapper has an additional class that determines
+   whether the map is showing or not */
 .contentwrapper.map-inactive {
-  width: 800px;
+  width: 775px;
 }
 .contentwrapper.map-active {
   width: 100%;
 }
+/* the content has a fixed width */
 .content {
   float: right;
+  /* TODO: this bit should be responsive */
+
   width: 700px;
 }
+/* the map lives inside this wrapper which stays in a
+   fixed position relative to the contentwrapper */
 .mapwrapper {
   position: absolute;
   top: 0;
@@ -44,28 +41,33 @@ header.jumbotron {
   left: 0;
   right: 700px;
   overflow: hidden;
+  transition: opacity 0.66s;
 }
 .map {
   height: 100%;
 }
+.map-inactive .mapwrapper {
+  opacity: 0.33;
+}
+.map-active .mapwrapper {
+  opacity: 1;
+}
+/* the content is the search form and results */
 .content {
   background-color: #ffffff;
-  padding-right: 33.333333333333336px;
+  padding-right: 25px;
 }
-/********************************************************************
- *   IMPORTANT map prettiness CSS
- */
 .mapnotch {
   position: absolute;
   box-sizing: content-box;
-  height: 66.66666666666667px;
-  width: 33.333333333333336px;
+  height: 50px;
+  width: 25px;
   bottom: 50%;
-  right: -33.333333333333336px;
-  border: 33.333333333333336px solid #ffffff;
+  right: -25px;
+  border: 25px solid #ffffff;
   border-left-width: 0;
-  border-top-right-radius: 66.66666666666667px;
-  border-bottom-right-radius: 66.66666666666667px;
+  border-top-right-radius: 50px;
+  border-bottom-right-radius: 50px;
   border-right-color: #feffff;
 }
 .mapnotch:before,
@@ -73,18 +75,20 @@ header.jumbotron {
   position: absolute;
   left: 0;
   content: '';
-  width: 33.333333333333336px;
+  width: 26px;
   height: 100vh;
   background-color: #ffffff;
 }
 .mapnotch:before {
-  bottom: 67px;
+  bottom: 50px;
 }
 .mapnotch:after {
-  top: 67px;
+  top: 50px;
 }
+/* adjust leaflet's components to avoid drawing stuff like the
+   attribution text under the covered-up right edge strip */
 .leaflet-right {
-  right: 33.333333333333336px;
+  right: 25px;
 }
 .map-inactive .leaflet-control-container {
   display: none;
