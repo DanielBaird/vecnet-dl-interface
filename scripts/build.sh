@@ -9,7 +9,7 @@ pushd $PROJ_DIR > /dev/null
 echo 'building css..'
 
 # compile the css
-lessc site/css/main.less site/css/main.css
+lessc parts/main.less site/css/main.css
 
 echo 'building html..'
 

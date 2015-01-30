@@ -1,28 +1,66 @@
 footer {
   text-align: center;
+  color: #999;
+  padding: 1em 0;
+  background-color: #ffffff;
+  background-color: #f8f8f8;
+  background-image: linear-gradient(to bottom, #fcfcfc 0%, #ffffff 100%);
+  background-image: linear-gradient(to bottom, #fdfdfd 0%, #ffffff 100%);
 }
 #title-bar {
   padding: 0 10px;
 }
 /* adjust header to be a bit slimmer */
 header.jumbotron {
+  color: white;
+  background-color: #00a3bb;
   margin-bottom: 0;
   padding-bottom: 10px;
+}
+header.jumbotron h1 {
+  font-size: 54px;
+  font-weight: bold;
+}
+header.jumbotron * {
+  color: inherit;
+}
+header.jumbotron hgroup {
+  margin: 0 auto;
+  transition: 0.33s ease-in-out;
+}
+.map-inactive header hgroup {
+  width: 760px;
+}
+.map-active header hgroup {
+  width: 100%;
+}
+/* sort out z-index */
+header {
+  position: relative;
+  z-index: 100;
+}
+.mapwrapper {
+  position: relative;
+  z-index: 1;
+}
+.content {
+  position: relative;
+  z-index: 10;
 }
 /* contentwrapper surrounds the map and the content */
 .contentwrapper {
   position: relative;
   margin: 0 auto;
-  transition: all 1s;
+  transition: all 0.66s ease-in-out;
+  overflow: hidden;
   /* height is set in js to fill the browser window */
 
 }
-/* the contentwrapper has an additional class that determines
-   whether the map is showing or not */
-.contentwrapper.map-inactive {
-  width: 775px;
+/* the body has a class that determines if the map is showing */
+.map-inactive .contentwrapper {
+  width: 736px;
 }
-.contentwrapper.map-active {
+.map-active .contentwrapper {
   width: 100%;
 }
 /* the content has a fixed width */
@@ -31,6 +69,8 @@ header.jumbotron {
   /* TODO: this bit should be responsive */
 
   width: 700px;
+  margin-left: -24px;
+  background-color: transparent;
 }
 /* the map lives inside this wrapper which stays in a
    fixed position relative to the contentwrapper */
@@ -39,57 +79,102 @@ header.jumbotron {
   top: 0;
   bottom: 0;
   left: 0;
-  right: 700px;
+  right: 676px;
   overflow: hidden;
-  transition: opacity 0.66s;
+  transition: opacity 1.5s ease-in-out;
 }
 .map {
   height: 100%;
 }
 .map-inactive .mapwrapper {
-  opacity: 0.33;
+  opacity: 0.25;
 }
 .map-active .mapwrapper {
   opacity: 1;
 }
-/* the content is the search form and results */
-.content {
+/* adjust leaflet's components to avoid drawing stuff like the
+   attribution text under the covered-up right edge strip */
+.leaflet-right {
+  right: 24px;
+}
+.map-inactive .leaflet-control-container {
+  display: none;
+}
+.vndl-search {
+  margin: 0;
+  background: transparent;
+  padding: 0;
+}
+.vndl-search fieldset {
   background-color: #ffffff;
-  padding-right: 25px;
+  position: relative;
+  z-index: 10;
+  padding: 16px 48px;
+  border-bottom: 1px solid #f8f8f8;
+}
+.vndl-search fieldset:first-of-type {
+  padding-top: 32px;
+}
+.vndl-search fieldset#mapfieldset {
+  background-color: transparent;
+  overflow: hidden;
+}
+.vndl-search fieldset#mapfieldset > * {
+  position: relative;
+  z-index: 10;
+  background-color: #ffffff;
 }
 .mapnotch {
-  position: absolute;
+  position: absolute ! important;
+  z-index: 9 ! important;
   box-sizing: content-box;
-  height: 50px;
-  width: 25px;
-  bottom: 50%;
-  right: -25px;
-  border: 25px solid #ffffff;
+  height: 48px;
+  width: 24px;
+  pointer-events: none;
+  background-color: transparent ! important;
+  left: 0;
+  top: 50%;
+  margin-top: -48px;
+  border: 24px solid #ffffff;
   border-left-width: 0;
-  border-top-right-radius: 50px;
-  border-bottom-right-radius: 50px;
-  border-right-color: #feffff;
+  border-top-right-radius: 48px;
+  border-bottom-right-radius: 48px;
 }
 .mapnotch:before,
 .mapnotch:after {
-  position: absolute;
-  left: 0;
   content: '';
-  width: 26px;
+  position: absolute;
+  width: 25px;
+  height: 1000%;
   height: 100vh;
   background-color: #ffffff;
 }
 .mapnotch:before {
-  bottom: 50px;
+  bottom: 48px;
 }
 .mapnotch:after {
-  top: 50px;
+  top: 48px;
 }
-/* adjust leaflet's components to avoid drawing stuff like the
-   attribution text under the covered-up right edge strip */
-.leaflet-right {
-  right: 25px;
+/* footer needs to have a bit that covers up the map overlap */
+footer {
+  position: relative;
 }
-.map-inactive .leaflet-control-container {
-  display: none;
+footer:after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 25px;
+  height: 1000%;
+  height: 100vh;
+  background-color: #ffffff;
+}
+.vndl-search .disabled {
+  color: #aaaaaa;
+}
+.vndl-search .form-group {
+  margin: 15px 0;
+}
+.vndl-results {
+  background-color: #ffffff;
 }

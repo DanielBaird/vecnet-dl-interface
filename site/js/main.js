@@ -1,45 +1,46 @@
-$(function(){
 
-    // init leaflet
-    var leafletmap = L.map('map', {
-        reuseTiles: true
-    });
+// assume jquery is available as $
 
-    function resizeMap(seconds) {
-        // repeatedly resize the map for however many seconds
-        var interval = 100; // milliseconds
+// disable an input AND add a "disabled" class to its wrapper.
+function disable(element) {
+    var $elem = $(element);
+    $elem.prop('disabled', true);
+    $elem.parent().closest('.checkbox, .checkbox-inline, .radio, .radio-inline, fieldset').addClass('disabled');
+}
+// un-disables an input AND removes the "disabled" class from its wrapper.
+function enable(element) {
+    var $elem = $(element);
+    $elem.prop('disabled', false);
+    $elem.parent().closest('.disabled').removeClass('disabled');
+}
+// ------------------------------------------------------------------
+(function(){
 
-        // start resizing
-        var resizingId = setInterval(function() {
-            leafletmap.invalidateSize(true);
-        }, interval);
+    // make a map
+    var theMap = new window.VndlMap('map');
 
-        // stop resizing
-        setTimeout(function() {
-            clearInterval(resizingId);
-        }, seconds * 1000);
-    }
-
-    // set the height of the contentwrapper to fill the screen.
+    // set the height of the contentwrapper to fill the screen
     var $cw = $('.contentwrapper');
-    var winHeight = $(window).height();
-    $cw.height(winHeight - $cw.position().top);
-    resizeMap(1.5);
+    $cw.height($(window).height() - $cw.position().top);
+    theMap.resizeFor(1.5);
 
+    // initialise all the things..
+    theMap.hide();
+    disable($('input[name=searchmap]'));
 
-    leafletmap.setView([-13, 140], 4);
-    // add an OpenStreetMap tile layer
-    L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="http://osm.org/copyright">OSM</a> contributors'
-    }).addTo(leafletmap);
-
-
-    // make a convenient testing button
-    $('#mapon').click(function(event){
-       $('.contentwrapper').toggleClass('map-active map-inactive');
-       resizeMap(1.5);
+    // set up the "show map" checkbox to switch the map on and off
+    // and also to allow/disallow the "search map area only" check
+    // box.
+    $('input[name=showmap]').change( function() {
+        var showmap = $('input[name=showmap]').prop('checked');
+        if (showmap) {
+            theMap.show();
+            enable($('input[name=searchmap]'));
+        } else {
+            theMap.hide();
+            disable($('input[name=searchmap]'));
+        }
     });
 
-
-});
+})();
 

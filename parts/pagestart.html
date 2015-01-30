@@ -10,32 +10,35 @@
 	<link rel="stylesheet" href="leaflet/leaflet.css">
 	<link rel="stylesheet" href="css/main.css">
 </head>
-<body>
+<body class="map-inactive">
 
 <div class="navbar navbar-inverse navbar-fixed-top">
 	<div class="nav-inner">
-		<button id="mapon">activate map</button>
 	</div>
 </div>
 
 <header class="jumbotron subhead row-fluid">
 	<hgroup>
 		<div class="container-fluid">
+
 			<div id="title-bar" class="row">
 				<div id="site-title" class="span6">
 					<h1><a href="/">Digital Library</a></h1>
-					uses .container-fluid rather than .container, to span full width.  side padding added to #title-bar
+					<p class="lead">
+						fancy new Discovery interface, woo
+					</p>
 				</div>
 			</div>
+
 		</div>
 	</hgroup>
 </header>
 
-<div class="contentwrapper map-inactive">
+<div class="contentwrapper">
 
 	<div class="mapwrapper">
 		<div id="map" class="map"></div>
-		<div class="mapnotch"></div>
+		<!-- <div class="oldmn"></div> -->
 	</div>
 
 	<div class="content">
