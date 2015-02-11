@@ -7,7 +7,7 @@
 			<legend class="sr-only">Text searching</legend>
 			<label class="sr-only" for="catalog_search">search for text</label>
 			<div class="input-group">
-				<input class="form-control input-lg" id="catalog_search" name="q" placeholder="search for text" tabindex="1" type="text">
+				<input class="form-control input-lg" id="catalog_search" name="q" placeholder="search for text" tabindex="1" type="text" />
 				<div class="input-group-btn">
 					<button type="submit" class="search-submit btn-lg btn btn-primary" id="search-submit-header" tabindex="2">
 						<i class="icon-search icon-white"></i> Search
@@ -23,10 +23,10 @@
 		<div class="mapnotch"></div>
 		<div class="form-group">
 			<div class="checkbox"><label>
-					<input type="checkbox" name="showmap" value="showmap"> show results on a map
+					<input type="checkbox" name="showmap" value="showmap" /> show results on a map
 			</label></div>
 			<div class="checkbox"><label>
-					<input type="checkbox" name="searchmap" value="searchmap"> search only the area shown on the map
+					<input type="checkbox" name="searchmap" value="searchmap" /> search only the area shown on the map
 			</label></div>
 		</div>
 	</fieldset>
@@ -43,26 +43,44 @@
 			</span>
 			-->
 			<div class="btn-group" role="group" aria-label="location filter">
-				<button class="btn btn-default btn-info" type="button" disabled="disabled">Location</button>
+				<div class="btn-group" role="group">
+					<button class="btn btn-info dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
+						Location
+					</button>
+					<ul class="dropdown-menu dropdown-menu" role="menu">
+						<li><a href="#">Add another location filter</a></li>
+						<li><a href="#">Remove this filter</a></li>
+					</ul>
+				</div>
 				<div class="btn-group" role="group">
 					<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
 						Asia: Kingdom of Cambodia
-						<i class="glyphicon glyphicon-remove" aria-hidden="true"></i>
+						<i class="fa fa-angle-down" aria-hidden="true"></i>
 					</button>
 					<ul class="dropdown-menu dropdown-menu-right" role="menu">
+						<li><a href="#">Add another location filter</a></li>
 						<li><a href="#">Remove this filter</a></li>
 					</ul>
 				</div>
 			</div>
 
 			<div class="btn-group" role="group" aria-label="location filter">
-				<button class="btn btn-default btn-info" type="button" disabled="disabled">Author</button>
+				<div class="btn-group" role="group">
+					<button class="btn btn-info dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
+						Author
+					</button>
+					<ul class="dropdown-menu dropdown-menu" role="menu">
+						<li><a href="#">Add another author filter</a></li>
+						<li><a href="#">Remove this filter</a></li>
+					</ul>
+				</div>
 				<div class="btn-group" role="group">
 					<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
 						Donatien François
-						<i class="glyphicon glyphicon-remove" aria-hidden="true"></i>
+						<i class="fa fa-angle-down" aria-hidden="true"></i>
 					</button>
 					<ul class="dropdown-menu dropdown-menu-right" role="menu">
+						<li><a href="#">Add another author filter</a></li>
 						<li><a href="#">Remove this filter</a></li>
 					</ul>
 				</div>
@@ -72,13 +90,13 @@
 	</fieldset>
 
 	<!-- available facets -->
-	<fieldset>
+	<fieldset style="display: none">
 		<legend class="sr-only">Search filters available</legend>
 		<div class="form-group">
 
 			<li class="expandable_new grey">
 				<a class="accordion-toggle grey collapsed" data-toggle="collapse" data-parent="#facet_group" data-target="#collapse_Author">
-					Author<i class="icon-chevron-right grey"></i>
+					Author<i class="icon-angle-right grey"></i>
 				</a>
 				<div style="height: 0px;" id="collapse_Author" class="accordion-body collapse">
 					<ul class="slide-list">
@@ -89,6 +107,13 @@
 				</div>
 			</li>
 
+		</div>
+	</fieldset>
+
+	<!-- search now -->
+	<fieldset>
+		<div class="form-group">
+			<button type="button" id="gosearch">do a fake search</button>
 		</div>
 	</fieldset>
 

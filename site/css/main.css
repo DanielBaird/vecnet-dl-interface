@@ -58,7 +58,7 @@ header {
 }
 /* the body has a class that determines if the map is showing */
 .map-inactive .contentwrapper {
-  width: 736px;
+  width: 740px;
 }
 .map-active .contentwrapper {
   width: 100%;
@@ -69,7 +69,7 @@ header {
   /* TODO: this bit should be responsive */
 
   width: 700px;
-  margin-left: -24px;
+  margin-left: -20px;
   background-color: transparent;
 }
 /* the map lives inside this wrapper which stays in a
@@ -79,7 +79,7 @@ header {
   top: 0;
   bottom: 0;
   left: 0;
-  right: 676px;
+  right: 680px;
   overflow: hidden;
   transition: opacity 1.5s ease-in-out;
 }
@@ -95,7 +95,7 @@ header {
 /* adjust leaflet's components to avoid drawing stuff like the
    attribution text under the covered-up right edge strip */
 .leaflet-right {
-  right: 24px;
+  right: 20px;
 }
 .map-inactive .leaflet-control-container {
   display: none;
@@ -107,16 +107,15 @@ header {
 }
 .vndl-search fieldset {
   background-color: #ffffff;
-  position: relative;
-  z-index: 10;
-  padding: 16px 48px;
+  padding: 14px 42px;
   border-bottom: 1px solid #f8f8f8;
 }
 .vndl-search fieldset:first-of-type {
-  padding-top: 32px;
+  padding-top: 28px;
 }
 .vndl-search fieldset#mapfieldset {
   background-color: transparent;
+  position: relative;
   overflow: hidden;
 }
 .vndl-search fieldset#mapfieldset > * {
@@ -128,32 +127,32 @@ header {
   position: absolute ! important;
   z-index: 9 ! important;
   box-sizing: content-box;
-  height: 48px;
-  width: 24px;
+  height: 40px;
+  width: 20px;
   pointer-events: none;
   background-color: transparent ! important;
   left: 0;
   top: 50%;
-  margin-top: -48px;
-  border: 24px solid #ffffff;
+  margin-top: -40px;
+  border: 20px solid #ffffff;
   border-left-width: 0;
-  border-top-right-radius: 48px;
-  border-bottom-right-radius: 48px;
+  border-top-right-radius: 40px;
+  border-bottom-right-radius: 40px;
 }
 .mapnotch:before,
 .mapnotch:after {
   content: '';
   position: absolute;
-  width: 25px;
+  width: 21px;
   height: 1000%;
   height: 100vh;
   background-color: #ffffff;
 }
 .mapnotch:before {
-  bottom: 48px;
+  bottom: 40px;
 }
 .mapnotch:after {
-  top: 48px;
+  top: 40px;
 }
 /* footer needs to have a bit that covers up the map overlap */
 footer {
@@ -164,10 +163,13 @@ footer:after {
   position: absolute;
   top: 100%;
   left: 0;
-  width: 25px;
+  width: 21px;
   height: 1000%;
   height: 100vh;
   background-color: #ffffff;
+}
+.vndl-search button .fa {
+  margin: 0 -0.33em 0 0.33em;
 }
 .vndl-search .disabled {
   color: #aaaaaa;
@@ -176,5 +178,6 @@ footer:after {
   margin: 15px 0;
 }
 .vndl-results {
+  padding: 2em 42px;
   background-color: #ffffff;
 }

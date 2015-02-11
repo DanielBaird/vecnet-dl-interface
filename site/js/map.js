@@ -12,11 +12,52 @@ window.VndlMap = function(mapDomId, options) {
     // this.opts is our options
     this.opts = options || {};
 
+    this.clearMarkers();
+
     this.l.setView([-13, 140], 4);
     // add an OpenStreetMap tile layer
     L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="http://osm.org/copyright">OSM</a> contributors'
     }).addTo(this.l);
+};
+// ------------------------------------------------------------------
+VndlMap.prototype.clearMarkers = function() {
+    // TODO: remove from Leaflet map first?
+    this.markers = [];
+};
+// ------------------------------------------------------------------
+VndlMap.prototype.findMarkers = function(domElement) {
+    var $elem = $(domElement);
+
+    var $results = $elem.find('.vndl-result');
+    var markers = this.markers;
+    var map = this.l;
+
+    // loop through results finding each one's map location
+    $results.each( function(index, result) {
+        var $points = $(result).find('[itemtype="http://schema.org/GeoCoordinates"]');
+        // alow multiple points for a single result..
+        var pts = [];
+        $points.each( function(i, pt) {
+            var $pt = $(pt);
+            var lat = $pt.find('[itemprop="latitude"]').first();
+            var lng = $pt.find('[itemprop="longitude"]').first();
+            if (lat.length > 0 && lng.length > 0) {
+                var latNum = parseFloat(lat.text());
+                var lngNum = parseFloat(lng.text());
+                pts.push({ lat: latNum, lng: lngNum });
+
+                // just for now, shove them onto the map
+                L.marker([latNum, lngNum]).addTo(map);
+            }
+        });
+        markers.push({
+            element: result,
+            pts: pts
+        });
+    });
+
+    console.log(markers);
 };
 // ------------------------------------------------------------------
 VndlMap.prototype.leaflet = function() {

@@ -2,7 +2,7 @@
 /////////////////////////////////// map and page layout LESS vars @@@
 @result-column-width: 700px;
 @inactive-map-width: 60px;
-@map-notch-width: ceil(0.4 * @inactive-map-width);
+@map-notch-width: ceil(0.33 * @inactive-map-width);
 @content-bg: #fff;
 @header-bg: #00a3bb;
 @line-color: #f8f8f8;
@@ -117,11 +117,11 @@ header      { position: relative; z-index: @header-z; }
 .leaflet-right { right: @map-notch-width; }
 .map-inactive .leaflet-control-container { display: none; }
 
-/////////////////////////////////////////// search form LESS vars @@@
+//////////////////////////////////////// content column LESS vars @@@
 
-@search-form-pad-unit: ceil(0.66 * @map-notch-width);
-@search-form-h-pad: ceil(3 * @search-form-pad-unit);
-@search-form-v-pad: ceil(1 * @search-form-pad-unit);
+@content-pad-unit: ceil(0.66 * @map-notch-width);
+@content-h-pad: ceil(3 * @content-pad-unit);
+@content-v-pad: ceil(1 * @content-pad-unit);
 
 @disabled-color: #aaa;
 
@@ -136,19 +136,20 @@ header      { position: relative; z-index: @header-z; }
 .vndl-search fieldset {
     // NORMAL fieldsets can have a background
     background-color: @content-bg;
-    position: relative;
-    z-index: @content-z;
-    padding: @search-form-v-pad @search-form-h-pad;
+    // position: relative;
+    // z-index: @content-z;
+    padding: @content-v-pad @content-h-pad;
     border-bottom: 1px solid @line-color;
     &:first-of-type {
         // the first thing in the search form gets extra top padding
-        padding-top: (2 * @search-form-v-pad);
+        padding-top: (2 * @content-v-pad);
     }
 }
 .vndl-search fieldset#mapfieldset {
     // this is the special fieldset with the map notch in it.
     // it's transparent, but everything in it gets the content bg.
     background-color: transparent;
+    position: relative;
     overflow: hidden;
     & > * {
         position: relative;
@@ -282,6 +283,12 @@ footer:after {
     background-color: @content-bg;
 }
 
+.vndl-search button .fa {
+    // icons are too close for some reason
+    // cheat by presuming it's on the right
+    margin: 0 -0.33em 0 0.33em;
+}
+
 .vndl-search .disabled {
     color: @disabled-color;
 }
@@ -295,6 +302,7 @@ footer:after {
 ////////////////////////////////////////////////////// search results
 
 .vndl-results {
+    padding: 2em @content-h-pad;
     background-color: @content-bg;
 }
 
