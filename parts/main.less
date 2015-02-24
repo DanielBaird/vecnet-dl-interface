@@ -83,8 +83,11 @@ header      { position: relative; z-index: @header-z; }
     width: @result-column-width;
     // overlap the map so we can make the map notch
     margin-left: (-1 * @map-notch-width);
+    // scroll this element's content
+    overflow-y: scroll;
     // gotta be transparent so the map can be seen through the notch
     background-color: transparent;
+    // IMPORTANT NOTE
     // unless they contain the map notch, things in the content
     // column should use a background rule like this:
     //     background-color: @content-bg

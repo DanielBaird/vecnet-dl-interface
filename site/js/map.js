@@ -48,12 +48,23 @@ VndlMap.prototype.findMarkers = function(domElement) {
                 pts.push({ lat: latNum, lng: lngNum });
 
                 // just for now, shove them onto the map
-                L.marker([latNum, lngNum]).addTo(map);
+                // L.marker([latNum, lngNum]).addTo(map);
             }
         });
+        // now make a map marker object for each point
+        var marks = [];
+        console.log(pts)
+        $.each(pts, function(pt) {
+            console.log(pts[pt])
+            var mark = L.marker(pts[pt]);
+            marks.push(mark);
+            mark.addTo(map);
+        });
+        // save all the stuff we found and made
         markers.push({
-            element: result,
-            pts: pts
+            resultElement: result,
+            points: pts,
+            mapMarks: marks
         });
     });
 

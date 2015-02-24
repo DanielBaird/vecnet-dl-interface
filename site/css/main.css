@@ -70,6 +70,7 @@ header {
 
   width: 700px;
   margin-left: -20px;
+  overflow-y: scroll;
   background-color: transparent;
 }
 /* the map lives inside this wrapper which stays in a
